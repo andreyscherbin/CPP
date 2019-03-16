@@ -1,0 +1,6 @@
+bin/
+.settings/
+docLab12/
+.classpath
+.project
+build.fxbuild doc/
