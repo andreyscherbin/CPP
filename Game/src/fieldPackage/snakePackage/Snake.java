@@ -63,6 +63,9 @@ public class Snake {
 		return tail.getX();
 	}
 
+	
+	
+	
 	/**
 	 * Функция получения координаты y хвоста змейки {@link Snake#tail}
 	 * 
