@@ -3,4 +3,8 @@ bin/
 docLab12/
 .classpath
 .project
+<<<<<<< HEAD
 build.fxbuild
+=======
+build.fxbuild doc/
+>>>>>>> fca70e253b5dcc7a3d6481f377664f1911ba85f2

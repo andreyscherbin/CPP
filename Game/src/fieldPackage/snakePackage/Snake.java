@@ -1,5 +1,7 @@
 package fieldPackage.snakePackage;
 
+import java.util.ArrayList;
+
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -10,7 +12,7 @@ import java.util.Vector;
 public class Snake {
 
 	/** Поле контейнер с элементами змейки */
-	private Vector<SnakeElement> snake;
+	private ArrayList<SnakeElement> snake;
 
 	/** Поле голова змейки */
 	private SnakeElement head;
@@ -26,7 +28,7 @@ public class Snake {
 
 	public Snake() {
 
-		snake = new Vector<SnakeElement>();
+		snake = new ArrayList<SnakeElement>();
 		head = new SnakeElement(0, 0);
 		tail = new SnakeElement(0, 0);
 		snake.add(head);
@@ -116,8 +118,8 @@ public class Snake {
 
 	/**
 	 * Функция установления нового направления движения змейки {@link Snake#flagWay}
-	 * 
-	 * @param flag - новое направление движения
+	 * 	
+	 * @param flag - новое направление движения (добавить информацию WARNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)
 	 */
 	public void way(int flag) {
 
@@ -171,23 +173,26 @@ public class Snake {
 	 */
 	public void moveSnake(int flag) {
 
-		Iterator<SnakeElement> SnakeIterator = snake.iterator();
-		int x = 0, y = 0;
-		for (int i = 0; i < lenght; i++) {
-
+		int x = 0;
+		int y = 0;
+		int i = 0;
+		for (SnakeElement snakeElement : snake) {
 			if (i == 0) {
 				x = head.getX();
 				y = head.getY();
-				if (flag == 4)
-					SnakeIterator.next().incX();
+				if (flag == 4) {
+					snakeElement.incX();
+				}
 				if (flag == 3)
-					SnakeIterator.next().decX();
+					snakeElement.decX();
 				if (flag == 2)
-					SnakeIterator.next().incY();
-				if (flag == 1)
-					SnakeIterator.next().decY();
+					snakeElement.incY();
+				if (flag == 1) {
+					snakeElement.decY();
+				}
 			} else {
-				SnakeElement element = SnakeIterator.next();
+				SnakeElement element = snakeElement;
+
 				int indexX = x, indexY = y;
 				x = element.getX();
 				y = element.getY();
@@ -198,6 +203,9 @@ public class Snake {
 					tail.setY(y);
 				}
 			}
+
+			i++;
+
 		}
 	}
 
