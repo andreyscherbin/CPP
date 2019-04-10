@@ -2,22 +2,22 @@ package fieldPackage.snakePackage;
 
 import java.util.Random;
 
-/** Класс описания фрукта */
+/** РљР»Р°СЃСЃ РѕРїРёСЃР°РЅРёСЏ С„СЂСѓРєС‚Р° */
 public class Fruit {
 
-	/** Поле координата фрукта */
+	/** РџРѕР»Рµ РєРѕРѕСЂРґРёРЅР°С‚Р° С„СЂСѓРєС‚Р° */
 	private int x = 0;
 
-	/** Флаг наличия на поле фрукта */
+	/** Р¤Р»Р°Рі РЅР°Р»РёС‡РёСЏ РЅР° РїРѕР»Рµ С„СЂСѓРєС‚Р° */
 	private boolean flagFruit = false;
 
 	public Fruit() {
 	}
-
+ 
 	/**
-	 * Функция получения поля {@link Fruit#x}
+	 * Р¤СѓРЅРєС†РёСЏ РїРѕР»СѓС‡РµРЅРёСЏ РїРѕР»СЏ {@link Fruit#x}
 	 * 
-	 * @return возвращает координату
+	 * @return РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕРѕСЂРґРёРЅР°С‚Сѓ
 	 */
 	public int getX() {
 
@@ -25,29 +25,29 @@ public class Fruit {
 	}
 
 	/**
-	 * Функция получения поля {@link Fruit#flagFruit}
+	 * Р¤СѓРЅРєС†РёСЏ РїРѕР»СѓС‡РµРЅРёСЏ РїРѕР»СЏ {@link Fruit#flagFruit}
 	 * 
-	 * @return возвращает флаг наличия на поле фрукта
+	 * @return РІРѕР·РІСЂР°С‰Р°РµС‚ С„Р»Р°Рі РЅР°Р»РёС‡РёСЏ РЅР° РїРѕР»Рµ С„СЂСѓРєС‚Р°
 	 */
 	public boolean getFlag() {
 
 		return flagFruit;
 	}
 
-	/** Функция установления поля {@link Fruit#x} */
+	/** Р¤СѓРЅРєС†РёСЏ СѓСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РїРѕР»СЏ {@link Fruit#x} */
 	public void setX() {
 
 		Random generator = new Random();
 		x = generator.nextInt(49);
 	}
 
-	/** Функция установления поля {@link Fruit#flagFruit} */
+	/** Р¤СѓРЅРєС†РёСЏ СѓСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РїРѕР»СЏ {@link Fruit#flagFruit} */
 	public void setFlag() {
 
 		flagFruit = true;
 	}
 
-	/** Функция сброса поля {@link Fruit#flagFruit} */
+	/** Р¤СѓРЅРєС†РёСЏ СЃР±СЂРѕСЃР° РїРѕР»СЏ {@link Fruit#flagFruit} */
 	public void resetFlag() {
 
 		flagFruit = false;

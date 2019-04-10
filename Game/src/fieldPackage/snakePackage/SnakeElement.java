@@ -1,31 +1,31 @@
 package fieldPackage.snakePackage;
 
-/** Класс описывающий один элемент змейки, со свойствами <b>x</b> и <b>y</b> */
+/** РљР»Р°СЃСЃ РѕРїРёСЃС‹РІР°СЋС‰РёР№ РѕРґРёРЅ СЌР»РµРјРµРЅС‚ Р·РјРµР№РєРё, СЃРѕ СЃРІРѕР№СЃС‚РІР°РјРё <b>x</b> Рё <b>y</b> */
 public class SnakeElement {
 
-	/** Поле координата x */
+	/** РџРѕР»Рµ РєРѕРѕСЂРґРёРЅР°С‚Р° x */
 	private int x;
 
-	/** Поле координата y */
+	/** РџРѕР»Рµ РєРѕРѕСЂРґРёРЅР°С‚Р° y */
 	private int y;
 
 	/**
-	 * Конструктор создания нового элемента змейки
+	 * РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р° Р·РјРµР№РєРё
 	 * 
-	 * @param x - координата x
-	 * @param y - координата y
+	 * @param x - РєРѕРѕСЂРґРёРЅР°С‚Р° x
+	 * @param y - РєРѕРѕСЂРґРёРЅР°С‚Р° y
 	 * @see SnakeElement#SnakeElement(SnakeElement)
 	 */
 	public SnakeElement(int x, int y) {
-
+ 
 		this.x = x;
 		this.y = y;
 	}
 
 	/**
-	 * Конструктор создания нового элемента змейки используя элемент
+	 * РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р° Р·РјРµР№РєРё РёСЃРїРѕР»СЊР·СѓСЏ СЌР»РµРјРµРЅС‚
 	 * 
-	 * @param next - элемент змейки
+	 * @param next - СЌР»РµРјРµРЅС‚ Р·РјРµР№РєРё
 	 * @see SnakeElement#SnakeElement(int, int)
 	 */
 	public SnakeElement(SnakeElement next) {
@@ -35,9 +35,9 @@ public class SnakeElement {
 	}
 
 	/**
-	 * Функция получения значения поля {@link SnakeElement#x}
+	 * Р¤СѓРЅРєС†РёСЏ РїРѕР»СѓС‡РµРЅРёСЏ Р·РЅР°С‡РµРЅРёСЏ РїРѕР»СЏ {@link SnakeElement#x}
 	 * 
-	 * @return возвращает координату x
+	 * @return РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕРѕСЂРґРёРЅР°С‚Сѓ x
 	 */
 	public int getX() {
 
@@ -45,9 +45,9 @@ public class SnakeElement {
 	}
 
 	/**
-	 * Функция получения значения поля {@link SnakeElement#y}
+	 * Р¤СѓРЅРєС†РёСЏ РїРѕР»СѓС‡РµРЅРёСЏ Р·РЅР°С‡РµРЅРёСЏ РїРѕР»СЏ {@link SnakeElement#y}
 	 * 
-	 * @return возвращает координату y
+	 * @return РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕРѕСЂРґРёРЅР°С‚Сѓ y
 	 */
 	public int getY() {
 
@@ -55,9 +55,9 @@ public class SnakeElement {
 	}
 
 	/**
-	 * Функция установления новой координаты {@link SnakeElement#x}
+	 * Р¤СѓРЅРєС†РёСЏ СѓСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РЅРѕРІРѕР№ РєРѕРѕСЂРґРёРЅР°С‚С‹ {@link SnakeElement#x}
 	 * 
-	 * @param x - координата x
+	 * @param x - РєРѕРѕСЂРґРёРЅР°С‚Р° x
 	 */
 	public void setX(int x) {
 
@@ -65,34 +65,34 @@ public class SnakeElement {
 	}
 
 	/**
-	 * Функция установления новой координаты {@link SnakeElement#y}
+	 * Р¤СѓРЅРєС†РёСЏ СѓСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РЅРѕРІРѕР№ РєРѕРѕСЂРґРёРЅР°С‚С‹ {@link SnakeElement#y}
 	 * 
-	 * @param y - координата y
+	 * @param y - РєРѕРѕСЂРґРёРЅР°С‚Р° y
 	 */
 	public void setY(int y) {
 
 		this.y = y;
 	}
 
-	/** Функция инкремента координаты {@link SnakeElement#x} */
+	/** Р¤СѓРЅРєС†РёСЏ РёРЅРєСЂРµРјРµРЅС‚Р° РєРѕРѕСЂРґРёРЅР°С‚С‹ {@link SnakeElement#x} */
 	public void incX() {
 
 		this.x++;
 	}
 
-	/** Функция инкремента координаты {@link SnakeElement#y} */
+	/** Р¤СѓРЅРєС†РёСЏ РёРЅРєСЂРµРјРµРЅС‚Р° РєРѕРѕСЂРґРёРЅР°С‚С‹ {@link SnakeElement#y} */
 	public void incY() {
 
 		this.y++;
 	}
 
-	/** Функция декремента координаты {@link SnakeElement#x} */
+	/** Р¤СѓРЅРєС†РёСЏ РґРµРєСЂРµРјРµРЅС‚Р° РєРѕРѕСЂРґРёРЅР°С‚С‹ {@link SnakeElement#x} */
 	public void decX() {
 
 		this.x--;
 	}
 
-	/** Функция декремента координаты {@link SnakeElement#y} */
+	/** Р¤СѓРЅРєС†РёСЏ РґРµРєСЂРµРјРµРЅС‚Р° РєРѕРѕСЂРґРёРЅР°С‚С‹ {@link SnakeElement#y} */
 	public void decY() {
 
 		this.y--;

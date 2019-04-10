@@ -1,22 +1,22 @@
 package application;
 
 
-/** Класс описания опций игры */
+/** РљР»Р°СЃСЃ РѕРїРёСЃР°РЅРёСЏ РѕРїС†РёР№ РёРіСЂС‹ */
 public class Options {
 
-	/** Поле автоматического режима */
+	/** РџРѕР»Рµ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ СЂРµР¶РёРјР° */
 	private boolean automodeFlag = false;
 
-	/** Поле скорости движения */
+	/** РџРѕР»Рµ СЃРєРѕСЂРѕСЃС‚Рё РґРІРёР¶РµРЅРёСЏ */
 	private int time = 25;
 	
 	public Options() {
 	}
-
+ 
 	/**
-	 * Функция установки поля {@link Options#automodeFlag}
+	 * Р¤СѓРЅРєС†РёСЏ СѓСЃС‚Р°РЅРѕРІРєРё РїРѕР»СЏ {@link Options#automodeFlag}
 	 * 
-	 * @param automodeFlag - установка режима
+	 * @param automodeFlag - СѓСЃС‚Р°РЅРѕРІРєР° СЂРµР¶РёРјР°
 	 */
 	private void setAutomodeFlag(boolean automodeFlag) {
 		
@@ -24,7 +24,7 @@ public class Options {
 	}
 
 	/**
-	 * Функция установки поля {@link Options#time}
+	 * Р¤СѓРЅРєС†РёСЏ СѓСЃС‚Р°РЅРѕРІРєРё РїРѕР»СЏ {@link Options#time}
 	 * 
 	 * @param time
 	 */
@@ -34,9 +34,9 @@ public class Options {
 	}
 
 	/**
-	 * Функция получения поля {@link Options#automodeFlag}
+	 * Р¤СѓРЅРєС†РёСЏ РїРѕР»СѓС‡РµРЅРёСЏ РїРѕР»СЏ {@link Options#automodeFlag}
 	 * 
-	 * @return возвращает режим работы
+	 * @return РІРѕР·РІСЂР°С‰Р°РµС‚ СЂРµР¶РёРј СЂР°Р±РѕС‚С‹
 	 */
 	public boolean getAutomodeFlag() {
 		
@@ -44,9 +44,9 @@ public class Options {
 	}
 
 	/**
-	 * Функция получения поля {@link Options#time}
+	 * Р¤СѓРЅРєС†РёСЏ РїРѕР»СѓС‡РµРЅРёСЏ РїРѕР»СЏ {@link Options#time}
 	 * 
-	 * @return возвращает скорость движения
+	 * @return РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРєРѕСЂРѕСЃС‚СЊ РґРІРёР¶РµРЅРёСЏ
 	 */
 	public int getTime() {
 		
@@ -54,9 +54,9 @@ public class Options {
 	}
 
 	/**
-	 * Функция установки выбранных опций
+	 * Р¤СѓРЅРєС†РёСЏ СѓСЃС‚Р°РЅРѕРІРєРё РІС‹Р±СЂР°РЅРЅС‹С… РѕРїС†РёР№
 	 * 
-	 * @param nameOperation - название опции
+	 * @param nameOperation - РЅР°Р·РІР°РЅРёРµ РѕРїС†РёРё
 	 */
 	public void setOptions(String nameOperation) {
 

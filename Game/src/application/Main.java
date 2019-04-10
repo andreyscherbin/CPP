@@ -12,7 +12,7 @@ import javafx.scene.layout.BorderPane;
 import java.util.concurrent.Exchanger;
 
 import fieldPackage.Field;
-
+ 
 public class Main extends Application {
 
 	private Field field;
@@ -26,14 +26,14 @@ public class Main extends Application {
 			primaryStage.show();
 
 			MenuBar mb = new MenuBar();
-			Menu newgame = new Menu("Новая игра");
+			Menu newgame = new Menu("РќРѕРІР°СЏ РёРіСЂР°");
 			mb.getMenus().add(newgame);
 			root.setTop(mb);
 
-			Menu record = new Menu("Рекорды");
+			Menu record = new Menu("Р РµРєРѕСЂРґС‹");
 			mb.getMenus().add(record);
 
-			Menu level = new Menu("Сложность");
+			Menu level = new Menu("РЎР»РѕР¶РЅРѕСЃС‚СЊ");
 			Menu automode = new Menu("Automode");
 
 			MenuItem automodeon = new MenuItem("on");
@@ -58,7 +58,7 @@ public class Main extends Application {
 				}
 			});
 
-			MenuItem easy = new MenuItem("Легкий");
+			MenuItem easy = new MenuItem("Р›РµРіРєРёР№");
 
 			easy.setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent event) {
@@ -70,7 +70,7 @@ public class Main extends Application {
 				}
 			});
 
-			MenuItem medium = new MenuItem("Средний");
+			MenuItem medium = new MenuItem("РЎСЂРµРґРЅРёР№");
 			medium.setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent event) {
 					field.stopGame();
@@ -80,7 +80,7 @@ public class Main extends Application {
 					field = new Field(root, options);
 				}
 			});
-			MenuItem hard = new MenuItem("Тяжелый");
+			MenuItem hard = new MenuItem("РўСЏР¶РµР»С‹Р№");
 			hard.setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent event) {
 					field.stopGame();
