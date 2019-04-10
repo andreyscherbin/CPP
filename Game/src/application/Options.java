@@ -1,29 +1,29 @@
 package application;
 
-/** Класс описания опций игры */
+/** пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ */
 public class Options {
 
-	/** Поле автоматического режима */
+	/** пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ */
 	private boolean automodeFlag = false;
 
-	/** Поле скорости движения */
+	/** пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 	private int time = 25;
 	
 	public Options() {
 	}
 
 	/**
-	 * Функция установки поля {@link Options#automodeFlag}
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ {@link Options#automodeFlag}
 	 * 
-	 * @param automodeFlag - установка режима
+	 * @param automodeFlag - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	private void setAutomodeFlag(boolean automodeFlag) {
 		
 		this.automodeFlag = automodeFlag;
 	}
-
+  
 	/**
-	 * Функция установки поля {@link Options#time}
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ {@link Options#time}
 	 * 
 	 * @param time
 	 */
@@ -33,9 +33,9 @@ public class Options {
 	}
 
 	/**
-	 * Функция получения поля {@link Options#automodeFlag}
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ {@link Options#automodeFlag}
 	 * 
-	 * @return возвращает режим работы
+	 * @return пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	public boolean getAutomodeFlag() {
 		
@@ -43,9 +43,9 @@ public class Options {
 	}
 
 	/**
-	 * Функция получения поля {@link Options#time}
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ {@link Options#time}
 	 * 
-	 * @return возвращает скорость движения
+	 * @return пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	public int getTime() {
 		
@@ -53,9 +53,9 @@ public class Options {
 	}
 
 	/**
-	 * Функция установки выбранных опций
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	 * 
-	 * @param nameOperation - название опции
+	 * @param nameOperation - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	 */
 	public void setOptions(String nameOperation) {
 

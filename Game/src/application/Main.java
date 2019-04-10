@@ -26,14 +26,14 @@ public class Main extends Application {
 			primaryStage.show();
 
 			MenuBar mb = new MenuBar();
-			Menu newgame = new Menu("Новая игра");
+			Menu newgame = new Menu("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ");
 			mb.getMenus().add(newgame);
 			root.setTop(mb);
 
-			Menu record = new Menu("Рекорды");
+			Menu record = new Menu("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 			mb.getMenus().add(record);
 
-			Menu level = new Menu("Сложность");
+			Menu level = new Menu("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 			Menu automode = new Menu("Automode");
 
 			MenuItem automodeon = new MenuItem("on");
@@ -58,7 +58,7 @@ public class Main extends Application {
 				}
 			});
 
-			MenuItem easy = new MenuItem("Легкий");
+			MenuItem easy = new MenuItem("пїЅпїЅпїЅпїЅпїЅпїЅ");
 
 			easy.setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent event) {
@@ -70,7 +70,7 @@ public class Main extends Application {
 				}
 			});
 
-			MenuItem medium = new MenuItem("Средний");
+			MenuItem medium = new MenuItem("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 			medium.setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent event) {
 					field.stopGame();
@@ -78,9 +78,9 @@ public class Main extends Application {
 					root.getChildren().clear();
 					root.setTop(mb);
 					field = new Field(root, options);
-				}
+				} 
 			});
-			MenuItem hard = new MenuItem("Тяжелый");
+			MenuItem hard = new MenuItem("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 			hard.setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent event) {
 					field.stopGame();
