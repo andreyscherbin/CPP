@@ -46,7 +46,7 @@ public class FileAnnotation {
 				if (method.isAnnotationPresent(WriteInFile.class)) {
 					try {
 
-						method.invoke(object, field); // Через рефлекцию вызываем функцию write
+						method.invoke(object, field); // С помощью рефлексии вызываем функцию write
 
 					} catch (Exception e) {
 
@@ -56,7 +56,7 @@ public class FileAnnotation {
 			if (nameOperation == "read") {
 				if (method.isAnnotationPresent(ReadFromFile.class)) {
 					try {
-						method.invoke(object, field); // Через рефлекцию вызываем функцию read
+						method.invoke(object, field); // С помощью рефлексии вызываем функцию read
 
 					} catch (Exception e) {
 
