@@ -2,6 +2,8 @@ package fieldPackage.snakePackage;
 
 import java.util.Random;
 
+import fieldPackage.Cnst;
+
 /** Класс описания фрукта */
 public class Fruit {
 
@@ -13,7 +15,7 @@ public class Fruit {
 
 	public Fruit() {
 	}
- 
+
 	/**
 	 * Функция получения поля {@link Fruit#x}
 	 * 
@@ -38,7 +40,7 @@ public class Fruit {
 	public void setX() {
 
 		Random generator = new Random();
-		x = generator.nextInt(49);
+		x = generator.nextInt(Cnst.MAXSIZE);
 	}
 
 	/** Функция установления поля {@link Fruit#flagFruit} */

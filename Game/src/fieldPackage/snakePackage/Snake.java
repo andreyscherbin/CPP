@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
 
+import fieldPackage.Cnst;
+
 /**
  * Класс змейки со свойствами <b>snake</b>, <b>head</b>, <b>tail</b>,
  * <b>flagWay</b>, <b>lenght</b>
@@ -19,18 +21,18 @@ public class Snake {
 
 	/** Поле хвост змейки */
 	private SnakeElement tail;
- 
+
 	/** Поле направление змейки */
-	private int flagWay = 4;
+	private int flagWay = Cnst.RIGHT;
 
 	/** Поле длина змейки */
-	private int lenght = 1;
+	private int lenght = Cnst.startLenght;
 
 	public Snake() {
 
 		snake = new ArrayList<SnakeElement>();
-		head = new SnakeElement(0, 0);
-		tail = new SnakeElement(0, 0);
+		head = new SnakeElement(Cnst.startX, Cnst.startY);
+		tail = new SnakeElement(Cnst.startX, Cnst.startY);
 		snake.add(head);
 	}
 
@@ -107,45 +109,45 @@ public class Snake {
 	}
 
 	/**
-	 * Функция получения итератора контейнера {@link Snake#snake}
+	 * Функция получения контейнера змейки {@link Snake#snake}
 	 * 
-	 * @return возвращает итератор контейнера
+	 * @return возвращает контейнер змейки
 	 */
-	public Iterator<SnakeElement> getIterator() {
+	public ArrayList<SnakeElement> getArrayList() {
 
-		return snake.iterator();
+		return snake;
 	}
 
 	/**
 	 * Функция установления нового направления движения змейки {@link Snake#flagWay}
-	 * 	
-	 * @param flag - новое направление движения (добавить информацию WARNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)
+	 * 
+	 * @param flagUser - направление выбранное игроком
 	 */
-	public void way(int flag) {
+	public void way(int flagUser) {
 
-		if (flag == 1 && flagWay != 2)
-			flagWay = flag;
-		if (flag == 2 && flagWay != 1)
-			flagWay = flag;
-		if (flag == 3 && flagWay != 4)
-			flagWay = flag;
-		if (flag == 4 && flagWay != 3)
-			flagWay = flag;
+		if (flagUser == Cnst.UP && flagWay != Cnst.DOWN)
+			flagWay = flagUser;
+		if (flagUser == Cnst.DOWN && flagWay != Cnst.UP)
+			flagWay = flagUser;
+		if (flagUser == Cnst.LEFT && flagWay != Cnst.RIGHT)
+			flagWay = flagUser;
+		if (flagUser == Cnst.RIGHT && flagWay != Cnst.LEFT)
+			flagWay = flagUser;
 	}
 
 	/** Функция проверки выхода за пределы поля */
 	public void circleWorld() {
 
-		if (head.getY() > 49) {
+		if (head.getY() > Cnst.MAXSIZE - 1) {
 			head.setY(0);
 		}
 		if (head.getY() < 0) {
-			head.setY(49);
+			head.setY(Cnst.MAXSIZE - 1);
 		}
 		if (head.getX() < 0) {
-			head.setX(49);
+			head.setX(Cnst.MAXSIZE - 1);
 		}
-		if (head.getX() > 49) {
+		if (head.getX() > Cnst.MAXSIZE - 1) {
 			head.setX(0);
 		}
 	}
@@ -153,12 +155,12 @@ public class Snake {
 	/**
 	 * Функция проверки на пути движения фрукта
 	 * 
-	 * @param fruit - координата x и y фрукта
+	 * @param x - координата x и y фрукта
 	 * @return результат проверки
 	 */
-	public boolean eat(int fruit) {
+	public boolean eat(int x) {
 
-		if (head.getX() == fruit && head.getY() == fruit) {
+		if (head.getX() == x && head.getY() == x) {
 			addSnakeElement(tail.getX(), tail.getY());
 			lenght++;
 			return true;
@@ -180,19 +182,18 @@ public class Snake {
 			if (i == 0) {
 				x = head.getX();
 				y = head.getY();
-				if (flag == 4) {
+				if (flag == Cnst.RIGHT) {
 					snakeElement.incX();
 				}
-				if (flag == 3)
+				if (flag == Cnst.LEFT)
 					snakeElement.decX();
-				if (flag == 2)
+				if (flag == Cnst.DOWN)
 					snakeElement.incY();
-				if (flag == 1) {
+				if (flag == Cnst.UP) {
 					snakeElement.decY();
 				}
 			} else {
 				SnakeElement element = snakeElement;
-
 				int indexX = x, indexY = y;
 				x = element.getX();
 				y = element.getY();
@@ -203,46 +204,44 @@ public class Snake {
 					tail.setY(y);
 				}
 			}
-
 			i++;
-
 		}
 	}
 
 	/**
 	 * Функция получения координат головы при следущем шаге
 	 * 
-	 * @param flag - текущее направление
+	 * @param flag - текущее направление движения змейки
 	 * @return возвращает элемент с координатами головы змейки
 	 */
-	public SnakeElement checkHead(int flag) {
+	public SnakeElement getHeadNextStep(int flag) {
 
 		SnakeElement headCheck = new SnakeElement(head.getX(), head.getY());
 		switch (flag) {
-		case 4:
+		case Cnst.RIGHT:
 			headCheck.incX();
 			break;
-		case 3:
+		case Cnst.LEFT:
 			headCheck.decX();
 			break;
-		case 2:
+		case Cnst.DOWN:
 			headCheck.incY();
 			break;
-		case 1:
+		case Cnst.UP:
 			headCheck.decY();
 			break;
 		}
 
-		if (headCheck.getY() > 49) {
+		if (headCheck.getY() > Cnst.MAXSIZE - 1) {
 			headCheck.setY(0);
 		}
 		if (headCheck.getY() < 0) {
-			headCheck.setY(49);
+			headCheck.setY(Cnst.MAXSIZE - 1);
 		}
 		if (headCheck.getX() < 0) {
-			headCheck.setX(49);
+			headCheck.setX(Cnst.MAXSIZE - 1);
 		}
-		if (headCheck.getX() > 49) {
+		if (headCheck.getX() > Cnst.MAXSIZE - 1) {
 			headCheck.setX(0);
 		}
 		return headCheck;

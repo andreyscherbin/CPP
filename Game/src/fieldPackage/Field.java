@@ -36,11 +36,11 @@ public class Field {
 	private int[][] fieldInt;
  
 	/** поле ссылка на объект опций */
-	private Options options;
-	
+	private Options options;	
+		
 	public Field(BorderPane root, Options options) {
 		
-		this.options = options;
+		this.options = options;		
 		fruit = new Fruit();
 		drawField(root);
 		addSnake();
@@ -64,13 +64,23 @@ public class Field {
 	private void writeKeyCode(KeyCode key) {
 		
 		if (key == KeyCode.UP) {
-			snake.way(1);
+			snake.way(Cnst.UP);
 		} else if (key == KeyCode.DOWN) {
-			snake.way(2);
+			snake.way(Cnst.DOWN);
 		} else if (key == KeyCode.LEFT) {
-			snake.way(3);
+			snake.way(Cnst.LEFT);
 		} else if (key == KeyCode.RIGHT) {
-			snake.way(4);
+			snake.way(Cnst.RIGHT);
+		}
+		if(key == KeyCode.SPACE && !options.isPause()) {
+			this.stopGame();
+			options.setPause();
+			return;
+		}
+		if(key == KeyCode.SPACE && options.isPause()){
+		    this.startGame(); 
+		    options.resetPause();
+		    return;
 		}
 	}
 
@@ -81,46 +91,45 @@ public class Field {
 	 */
 	private void drawField(BorderPane root) {
 
-		fieldRectangle = new Rectangle[50][50];
-		for (int i = 0; i < 50; i++) {
-			for (int j = 0; j < 50; j++) {
+		fieldRectangle = new Rectangle[Cnst.MAXSIZE][Cnst.MAXSIZE];
+		for (int i = 0; i < Cnst.MAXSIZE; i++) {
+			for (int j = 0; j < Cnst.MAXSIZE; j++) {
 
-				fieldRectangle[i][j] = new Rectangle(50 + (j * 10), 50 + (i * 10), 10, 10);
+				fieldRectangle[i][j] = new Rectangle(Cnst.MAXSIZE + (j * Cnst.WIDE), Cnst.MAXSIZE + (i * Cnst.WIDE), Cnst.WIDE, Cnst.WIDE);
 				fieldRectangle[i][j].setFill(Color.GREEN);
 				root.getChildren().add(fieldRectangle[i][j]);
 			}
 		}
-		fieldInt = new int[50][50];
-		for (int i = 0; i < 50; i++) {
-			for (int j = 0; j < 50; j++) {
+		fieldInt = new int[Cnst.MAXSIZE][Cnst.MAXSIZE];
+		for (int i = 0; i < Cnst.MAXSIZE; i++) {
+			for (int j = 0; j < Cnst.MAXSIZE; j++) {
 				fieldInt[i][j] = 0;
 			}
 		}
 	}
 
 	/** Функция рисования змейки на поле */
-	private void drawSnake() {
+	private void drawSnake() {		
 		
-		int lenght = snake.getLenght();
-		Iterator<SnakeElement> it = snake.getIterator();
-		for (int i = 0; i < lenght; i++) {
-			SnakeElement element = it.next();
-			int x = element.getX();
-			int y = element.getY();
+		for (SnakeElement snakeElement : snake.getArrayList()) {			
+			int x = snakeElement.getX();
+			int y = snakeElement.getY();
 			fieldRectangle[y][x].setFill(Color.RED);
 			fieldInt[y][x] = 1;
 		}
 	}
+	
+	/** Получить Snake */
+	public Snake getSnake() {
+		return snake;
+	}
 
 	/** Функция удаления змейки с поля */
-	private void deleteSnake() {
+	public void deleteSnake() {
 		
-		int lenght = snake.getLenght();
-		Iterator<SnakeElement> it = snake.getIterator();
-		for (int i = 0; i < lenght; i++) {
-			SnakeElement element = it.next();
-			int x = element.getX();
-			int y = element.getY();
+		for (SnakeElement snakeElement : snake.getArrayList()) {			
+			int x = snakeElement.getX();
+			int y = snakeElement.getY();
 			fieldRectangle[y][x].setFill(Color.GREEN);
 			fieldInt[y][x] = 0;
 		}
@@ -153,12 +162,15 @@ public class Field {
 		
 		snakelife.interrupt();
 	}
+	
+	/** Функция возобновления игры */
+	public void startGame() {
+		
+		snakelife = new SnakeLife();
+		snakelife.start();
+	}
 
-	/**
-	 * Внутренний класс-поток в котором реализуется движение змейки на поле игры
-	 * 
-	 * @author student
-	 */
+	/** Внутренний класс-поток в котором реализуется движение змейки на поле игры */
 	private class SnakeLife extends Thread {
 		
 		SnakeLife() {
@@ -177,16 +189,16 @@ public class Field {
 			y = snake.getYHead();
 			if (y == fruitCordinate) {
 				if (x < fruitCordinate)
-					return 4;
+					return Cnst.RIGHT;
 
 				if (x > fruitCordinate)
-					return 3;
+					return Cnst.LEFT;
 			}
 			if (x == fruitCordinate) {
 				if (y > fruitCordinate)
-					return 1;
+					return Cnst.UP;
 				if (y < fruitCordinate)
-					return 2;
+					return Cnst.DOWN;
 			}
 			return 0;
 		}
@@ -222,7 +234,7 @@ public class Field {
 						fruit.resetFlag();
 					}
 					drawSnake();
-					SnakeElement headCheck = snake.checkHead(flag);
+					SnakeElement headCheck = snake.getHeadNextStep(flag);
 					int x = headCheck.getX(), y = headCheck.getY();
 					if (fieldInt[y][x] == 1) {
 						return;
