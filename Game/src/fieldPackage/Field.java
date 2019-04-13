@@ -96,7 +96,7 @@ public class Field {
 			for (int j = 0; j < Cnst.MAXSIZE; j++) {
 
 				fieldRectangle[i][j] = new Rectangle(Cnst.MAXSIZE + (j * Cnst.WIDE), Cnst.MAXSIZE + (i * Cnst.WIDE), Cnst.WIDE, Cnst.WIDE);
-				fieldRectangle[i][j].setFill(Color.GREEN);
+				fieldRectangle[i][j].setFill(Color.GREEN);				
 				root.getChildren().add(fieldRectangle[i][j]);
 			}
 		}
@@ -205,6 +205,7 @@ public class Field {
 
 		/** Основной алгоритм реализации жизни змейки на поле игры */
 		public void run() {
+			System.out.println("hello i am run");
 			do {
 				if (!Thread.interrupted()) {
 

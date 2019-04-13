@@ -95,6 +95,12 @@ public class Snake {
 
 		return flagWay;
 	}
+	
+	/** Функция установки длины */
+	public void setLenght(int lenght) {
+		
+		this.lenght = lenght;
+	}
 
 	/**
 	 * Функция создания и добавления элемента в контейнер {@link Snake#snake}
