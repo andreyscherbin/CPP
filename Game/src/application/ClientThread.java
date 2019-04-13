@@ -100,13 +100,13 @@ public class ClientThread extends Thread {
 
 		easy.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				String str = "easy";
+				String str = "easy";                    // Убрать лишний код , убрать повторения
 				try {
 					serverThread.interrupt();
 					str = exgr.exchange(str);
 					System.out.println(str + " client");
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+					// TODO Auto-generated catch block        // Выводить что-то
 					e.printStackTrace();
 				}
 			}
