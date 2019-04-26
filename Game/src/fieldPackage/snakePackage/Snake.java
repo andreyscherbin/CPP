@@ -129,16 +129,29 @@ public class Snake {
 	 * 
 	 * @param flagUser - направление выбранное игроком
 	 */
-	public void way(int flagUser) {
+	public boolean way(int flagUser) {
 
 		if (flagUser == Cnst.UP && flagWay != Cnst.DOWN)
+		{
 			flagWay = flagUser;
+			return true;
+		}
 		if (flagUser == Cnst.DOWN && flagWay != Cnst.UP)
+		{
 			flagWay = flagUser;
+			return true;
+		}
 		if (flagUser == Cnst.LEFT && flagWay != Cnst.RIGHT)
+		{
 			flagWay = flagUser;
+			return true;
+		}
 		if (flagUser == Cnst.RIGHT && flagWay != Cnst.LEFT)
+		{
 			flagWay = flagUser;
+			return true;
+		}		
+		return false;
 	}
 
 	/** Функция проверки выхода за пределы поля */

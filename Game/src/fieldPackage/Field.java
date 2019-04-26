@@ -1,18 +1,13 @@
 package fieldPackage;
 
-import java.util.Iterator;
-import java.util.Random;
-import java.util.concurrent.Exchanger;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.ArrayList;
 
+import application.FileSystem;
 import application.Options;
 import fieldPackage.snakePackage.Fruit;
 import fieldPackage.snakePackage.Snake;
 import fieldPackage.snakePackage.SnakeElement;
-import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -36,14 +31,24 @@ public class Field {
 	private int[][] fieldInt;
  
 	/** поле ссылка на объект опций */
-	private Options options;	
+	private Options options;
+	private FileSystem snakeNotation;
+	private ArrayList<FileSystem> notationList;
+	
 		
-	public Field(BorderPane root, Options options) {
+	public Field(BorderPane root, Options options, FileSystem snakeNotation, ArrayList<FileSystem> notationList) {
 		
-		this.options = options;		
+		this.options = options;			
+		this.snakeNotation = snakeNotation;
+		this.notationList = notationList;
 		fruit = new Fruit();
 		drawField(root);
 		addSnake();
+		snakeNotation.masX[snakeNotation.index] = snake.getXHead();
+		snakeNotation.masY[snakeNotation.index] = snake.getYHead();
+		snakeNotation.masWay[snakeNotation.index] = snake.wayFlag();
+		snakeNotation.lenght[snakeNotation.index] = snake.getLenght();
+		snakeNotation.index++;
 
 		if (options.getAutomodeFlag() == false) {
 			root.getScene().setOnKeyPressed(e -> writeKeyCode(e.getCode()));			
@@ -64,13 +69,41 @@ public class Field {
 	private void writeKeyCode(KeyCode key) {
 		
 		if (key == KeyCode.UP) {
-			snake.way(Cnst.UP);
+			if(snake.way(Cnst.UP))
+			{
+			snakeNotation.masX[snakeNotation.index] = snake.getXHead();
+			snakeNotation.masY[snakeNotation.index] = snake.getYHead();
+			snakeNotation.masWay[snakeNotation.index] = snake.wayFlag();
+			snakeNotation.lenght[snakeNotation.index] = snake.getLenght();
+			snakeNotation.index++;
+			}
 		} else if (key == KeyCode.DOWN) {
-			snake.way(Cnst.DOWN);
+			if(snake.way(Cnst.DOWN))
+			{
+			snakeNotation.masX[snakeNotation.index] = snake.getXHead();
+			snakeNotation.masY[snakeNotation.index] = snake.getYHead();
+			snakeNotation.masWay[snakeNotation.index] = snake.wayFlag();
+			snakeNotation.lenght[snakeNotation.index] = snake.getLenght();
+			snakeNotation.index++;
+			}
 		} else if (key == KeyCode.LEFT) {
-			snake.way(Cnst.LEFT);
+			if(snake.way(Cnst.LEFT))
+			{
+			snakeNotation.masX[snakeNotation.index] = snake.getXHead();
+			snakeNotation.masY[snakeNotation.index] = snake.getYHead();
+			snakeNotation.masWay[snakeNotation.index] = snake.wayFlag();
+			snakeNotation.lenght[snakeNotation.index] = snake.getLenght();
+			snakeNotation.index++;
+			}
 		} else if (key == KeyCode.RIGHT) {
-			snake.way(Cnst.RIGHT);
+			if(snake.way(Cnst.RIGHT))
+			{
+			snakeNotation.masX[snakeNotation.index] = snake.getXHead();
+			snakeNotation.masY[snakeNotation.index] = snake.getYHead();
+			snakeNotation.masWay[snakeNotation.index] = snake.wayFlag();
+			snakeNotation.lenght[snakeNotation.index] = snake.getLenght();
+			snakeNotation.index++;	
+			}
 		}
 		if(key == KeyCode.SPACE && !options.isPause()) {
 			this.stopGame();
@@ -159,7 +192,7 @@ public class Field {
 
 	/** Функция окончания игры */
 	public void stopGame() {
-		
+		options.setPause();
 		snakelife.interrupt();
 	}
 	
@@ -168,6 +201,7 @@ public class Field {
 		
 		snakelife = new SnakeLife();
 		snakelife.start();
+		options.resetPause();
 	}
 
 	/** Внутренний класс-поток в котором реализуется движение змейки на поле игры */
@@ -205,7 +239,7 @@ public class Field {
 
 		/** Основной алгоритм реализации жизни змейки на поле игры */
 		public void run() {
-			System.out.println("hello i am run");
+			
 			do {
 				if (!Thread.interrupted()) {
 
@@ -233,6 +267,11 @@ public class Field {
 					snake.circleWorld();
 					if (snake.eat(fruit.getX())) {
 						fruit.resetFlag();
+						snakeNotation.masX[snakeNotation.index] = snake.getXHead();
+						snakeNotation.masY[snakeNotation.index] = snake.getYHead();
+						snakeNotation.masWay[snakeNotation.index] = snake.wayFlag();
+						snakeNotation.lenght[snakeNotation.index] = snake.getLenght();
+						snakeNotation.index++;
 					}
 					drawSnake();
 					SnakeElement headCheck = snake.getHeadNextStep(flag);

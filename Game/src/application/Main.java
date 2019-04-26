@@ -9,17 +9,12 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
-
 import java.util.concurrent.Exchanger;
-
 import fieldPackage.Field;
 
 public class Main extends Application {
-
-	
-
 	public void start(Stage primaryStage) {
-
+		
 		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root,700,700);
 		primaryStage.setScene(scene);
@@ -30,7 +25,8 @@ public class Main extends Application {
 		ClientThread clientThread = new ClientThread(root,exgr);
 		clientThread.start();		
 		serverThread.setThread(clientThread);
-		clientThread.setThread(serverThread);
+		clientThread.setThread(serverThread);			
+		
 	}
 
 	public static void main(String[] args) {

@@ -20,12 +20,56 @@ public class ClientThread extends Thread {
 
 	ClientThread(BorderPane root, Exchanger<String> e) {
 
-		Exchanger<String> exgr = e;
+		Exchanger<String> exgr = e;                   /// что за exgr ?
 		this.root = root;
 
 		MenuBar mb = new MenuBar();
 		Menu newgame = new Menu("Новая игра");
-		mb.getMenus().add(newgame);
+		MenuItem newg = new MenuItem("Новая игра");
+		newgame.getItems().addAll(newg);
+		newgame.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {			
+				String str = "new";
+				try {
+					serverThread.interrupt();
+					str = exgr.exchange(str);					
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		Menu sort = new Menu("Сортировка");
+		MenuItem java = new Menu("java");
+		MenuItem scala = new Menu("scala");
+		sort.getItems().addAll(java,scala);
+		java.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {			
+				String str = "javaSort";
+				try {
+					serverThread.interrupt();
+					str = exgr.exchange(str);					
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		scala.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {			
+				String str = "scalaSort";
+				try {
+					serverThread.interrupt();
+					str = exgr.exchange(str);					
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		mb.getMenus().add(newgame);		
 		root.setTop(mb);
 
 		Menu record = new Menu("Рекорды");
@@ -43,8 +87,7 @@ public class ClientThread extends Thread {
 				String str = "write";
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);
-					System.out.println(str + " client");
+					str = exgr.exchange(str);					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -56,8 +99,7 @@ public class ClientThread extends Thread {
 				String str = "read";
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);
-					System.out.println(str + " client");
+					str = exgr.exchange(str);					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -73,8 +115,7 @@ public class ClientThread extends Thread {
 				String str = "automodeOn";
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);
-					System.out.println(str + " client");
+					str = exgr.exchange(str);					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -87,8 +128,7 @@ public class ClientThread extends Thread {
 				String str = "automodeOff";
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);
-					System.out.println(str + " client");
+					str = exgr.exchange(str);					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -103,8 +143,7 @@ public class ClientThread extends Thread {
 				String str = "easy";                    // Убрать лишний код , убрать повторения
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);
-					System.out.println(str + " client");
+					str = exgr.exchange(str);				
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block        // Выводить что-то
 					e.printStackTrace();
@@ -119,7 +158,7 @@ public class ClientThread extends Thread {
 				try {
 					serverThread.interrupt();
 					str = exgr.exchange(str);
-					System.out.println(str + " client");
+					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -133,7 +172,7 @@ public class ClientThread extends Thread {
 				try {
 					serverThread.interrupt();
 					str = exgr.exchange(str);
-					System.out.println(str + " client");
+					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -144,13 +183,14 @@ public class ClientThread extends Thread {
 		mb.getMenus().add(level);
 		mb.getMenus().add(automode);
 		mb.getMenus().add(saveandopen);
+		mb.getMenus().add(sort);
 
 	}
 
 	/** Основной алгоритм реализации жизни змейки на поле игры */
 	public void run() {
 		do {
-			System.out.println("ClientSnake");
+			
 			try {
 				sleep(1000);
 			} catch (InterruptedException e) {

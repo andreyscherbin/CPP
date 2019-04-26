@@ -1,117 +1,158 @@
 package application;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
+import java.util.TreeMap;
+
 import fieldPackage.Field;
 import fieldPackage.snakePackage.SnakeElement;
 
 /** Класс в котором описана нотация игры */
-public class FileSystem {
+public class FileSystem implements Comparable<FileSystem> {
 
 	private FileWriter writer = null;
 	private FileReader reader = null;
-	
+
 	/** За голову возьмем '*' */
 	private char head = '*';
-	
+
 	/** За хвост возьмем '#' */
 	private char tail = '#';
-	
-	/** За обычный элемент возьмем '>' */	
+
+	/** За обычный элемент возьмем '>' */
 	private char element = '>';
-	
+	private char wayDown = '↓';
+	private char wayUp = '↑';
+	private char wayRight = '→';
+	private char wayLeft = '←';
 	private char x = 'x';
 	private char y = 'y';
 
+	public int[] masX;
+	public int[] masY;
+	public int[] masWay;
+	public int[] lenght;
+	public int index = 0;
+	public int N = 0;
+
 	public FileSystem() {
+
+		masX = new int[50];
+		masY = new int[50];
+		masWay = new int[50];
+		lenght = new int[50];
+
 	}
 
-	public void write(Field field) throws Exception {
-		int i = 1;
-		try {
-			writer = new FileWriter("C:\\Users\\VALERA\\eclipse-workspace\\Game\\src\\savedgame.txt");
-			ArrayList<SnakeElement> list = field.getSnake().getArrayList();
-			Collections.reverse(list);
-			int lenght = field.getSnake().getLenght();
-			int flagWay = field.getSnake().wayFlag();
-			for (SnakeElement snakeElement : list) {
-				if (i == 1) {
-					String s = Integer.toString(lenght);
+	public FileSystem(FileSystem copyObject) {
+
+		masX = new int[50];
+		masY = new int[50];
+		masWay = new int[50];
+		lenght = new int[50];
+		index = copyObject.index;
+		N = copyObject.N;
+		System.arraycopy(copyObject.masX, 0, masX, 0, 50);
+		System.arraycopy(copyObject.masY, 0, masY, 0, 50);
+		System.arraycopy(copyObject.masWay, 0, masWay, 0, 50);
+		System.arraycopy(copyObject.lenght, 0, lenght, 0, 50);
+	}
+
+	public void write(Field field, boolean rewrite, ArrayList<FileSystem> notationList) throws Exception {
+		if (!rewrite) {
+
+			writer = new FileWriter("C:\\Users\\VALERA\\eclipse-workspace\\Game\\src\\savedgame.txt", true);
+			BufferedWriter bufferWriter = new BufferedWriter(writer);
+
+			try {
+
+				for (int i = 0; i < index; i++) {
+					String s = Integer.toString(lenght[i]);
 					writer.write(s);
-					s = Integer.toString(flagWay);
+					s = Integer.toString(masWay[i]);
 					writer.write(s);
-					if (lenght == 1) {
-						writer.write(head);
-					} else {
-						writer.write(tail);
-					}
-					writer.write(x);
-					s = Integer.toString(snakeElement.getX());
-					writer.write(s);
-					writer.write(y);
-					s = Integer.toString(snakeElement.getY());
-					writer.write(s);
-					i++;
-					continue;
-				}
-				if (i != lenght && i < lenght) {
-					writer.write(element);
-					writer.write(x);
-					String s = Integer.toString(snakeElement.getX());
-					writer.write(s);
-					writer.write(y);
-					s = Integer.toString(snakeElement.getY());
-					writer.write(s);
-					i++;
-				}
-				if (i == lenght) {
 					writer.write(head);
 					writer.write(x);
-					String s = Integer.toString(snakeElement.getX());
+					s = Integer.toString(masX[i]);
 					writer.write(s);
 					writer.write(y);
-					s = Integer.toString(snakeElement.getY());
+					s = Integer.toString(masY[i]);
 					writer.write(s);
-					i++;
+					writer.write(' ');
 
 				}
+				writer.write('\n');
+				bufferWriter.close();
+
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+
+		}
+		if (rewrite) {
+
+			writer = new FileWriter("C:\\Users\\VALERA\\eclipse-workspace\\Game\\src\\savedgame.txt");
+			for (FileSystem snakeNotation : notationList) {
+
+				for (int i = 0; i < snakeNotation.index; i++) {
+					String s = Integer.toString(snakeNotation.lenght[i]);
+					writer.write(s);
+					s = Integer.toString(snakeNotation.masWay[i]);
+					writer.write(s);
+					writer.write(snakeNotation.head);
+					writer.write(snakeNotation.x);
+					s = Integer.toString(snakeNotation.masX[i]);
+					writer.write(s);
+					writer.write(snakeNotation.y);
+					s = Integer.toString(snakeNotation.masY[i]);
+					writer.write(s);
+					writer.write(' ');
+				}
+				writer.write('\n');
+
 			}
 			writer.close();
-		} catch (Exception e) {
-			System.out.println(e);
 		}
-		System.out.println("File writing complete.");
+
 	}
+	
+	public void read(Field field) throws IOException {
+		ArrayList<String> rows = new ArrayList<String>();
+		BufferedReader reader = new BufferedReader(
+				new FileReader("C:\\Users\\VALERA\\eclipse-workspace\\Game\\andrey.txt"));
 
-	public void read(Field field) throws Exception {
-		try {
-			System.out.println("read");
-			reader = new FileReader("C:\\Users\\VALERA\\eclipse-workspace\\Game\\src\\savedgame.txt");
-			ArrayList<SnakeElement> list = field.getSnake().getArrayList();
-			list.clear();
-			int lenght = Integer.parseInt(String.valueOf(reader.read()));
-			int flagWay = Integer.parseInt(String.valueOf(reader.read()));
-			System.out.println(lenght);
-			System.out.println(flagWay);
-			for (int i = 0; i < lenght; i++) {
+		String s;
+		while ((s = reader.readLine()) != null)
+			rows.add(s);
 
-				reader.read();
-				reader.read();
-				int x = Integer.parseInt(String.valueOf(reader.read()));
-				reader.read();
-				int y = Integer.parseInt(String.valueOf(reader.read()));
-				SnakeElement snakeElement = new SnakeElement(x, y);
-				list.add(snakeElement);
-			}
-			Collections.reverse(list);
-			field.getSnake().way(flagWay);
-			field.getSnake().setLenght(lenght);
-			reader.close();
-		} catch (Exception e) {
-			System.out.println(e);
+		Collections.sort(rows);
+
+		FileWriter writer = new FileWriter("C:\\Users\\VALERA\\eclipse-workspace\\Game\\andrey.txt");
+		for (String cur : rows)
+			writer.write(cur + "\n");
+
+		reader.close();
+		writer.close();
+	}
+	
+	public int compareTo(FileSystem o) {
+
+		Integer lenght1 = this.lenght[this.index - 1];
+		Integer lenght2 = o.lenght[o.index - 1];
+
+		if (lenght2 > lenght1) {
+			return -1;
+		} else if (lenght2 < lenght1) {
+			return 1;
+		} else {
+			return 0;
 		}
-		System.out.println("File reading complete.");
-	}
+	}	
 }

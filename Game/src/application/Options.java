@@ -17,7 +17,7 @@ public class Options {
 
 	/** Функция проверки наличия паузы в игре */
 	public boolean isPause() {
-		
+
 		if (!pause)
 			return false;
 		else
