@@ -2,18 +2,14 @@ package com.bsuir.vmsis;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Exchanger;
 
-import org.springframework.stereotype.Repository;
-
 import com.bsuir.vmsis1.Field;
-import com.bsuir.vmsis1.snake.SnakeElement;
 import javafx.application.Platform;
 import javafx.scene.layout.BorderPane;
 
-@Repository
+
 public class ServerThread extends Thread {
 
 	private Field field;
@@ -37,11 +33,11 @@ public class ServerThread extends Thread {
 	void setThread(ClientThread clientThread) {
 		this.clientThread = clientThread;
 	}
-	
-	public List <FileSystem> getNotationList(){
+
+	public List<FileSystem> getNotationList() {
 		return notationList;
 	}
-	
+
 	private void javaQuickSort(int a, int b) {
 
 		if (a >= b)
@@ -57,7 +53,7 @@ public class ServerThread extends Thread {
 				right--;
 
 			if (right > left)
-				
+
 			{
 				Collections.swap(notationList, left, right);
 			}
@@ -106,35 +102,36 @@ public class ServerThread extends Thread {
 						});
 					}
 					if (str == "javaSort") {
-						
+
 						long start = System.nanoTime();
-				        long milliStart = System.currentTimeMillis();
-				        
+						long milliStart = System.currentTimeMillis();
+
 						javaQuickSort(0, notationList.size() - 1);
-						
-						
+
 						long finish = System.nanoTime();
-				        long milliStop = System.currentTimeMillis();
-				        long nano = finish - start;
-				        long milli = milliStop - milliStart;
-				        System.out.println(nano + "  " + milli);
-				        
-				        snakeNotation.write(field, true, notationList);
+						long milliStop = System.currentTimeMillis();
+						long nano = finish - start;
+						long milli = milliStop - milliStart;
+						System.out.println(nano + "  " + milli);
+
+						snakeNotation.write(field, true, notationList);
 					}
-					
+
 					if (str == "scalaSort") {
-						
+
 						long start = System.nanoTime();
-				        long milliStart = System.currentTimeMillis();
+						long milliStart = System.currentTimeMillis();
 						
-						//ScalaQuickSort.scalaQuickSort(notationList);
+						ScalaQuickSort.scalaQuickSort(notationList);		
 						
+						Goldbach.goldbach(454);				   
+					    
 						long finish = System.nanoTime();
-				        long milliStop = System.currentTimeMillis();
-				        long nano = finish - start;
-				        long milli = milliStop - milliStart;
-				        System.out.println(nano + "  " + milli);
-						
+						long milliStop = System.currentTimeMillis();
+						long nano = finish - start;
+						long milli = milliStop - milliStart;
+						System.out.println(nano + "  " + milli);
+
 					}
 				}
 			} catch (InterruptedException e) {

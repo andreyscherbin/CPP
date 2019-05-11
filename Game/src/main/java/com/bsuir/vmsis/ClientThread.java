@@ -20,7 +20,7 @@ public class ClientThread extends Thread {
 
 	ClientThread(BorderPane root, Exchanger<String> e) {
 
-		Exchanger<String> exgr = e;                   /// что за exgr ?
+		Exchanger<String> objectExChanger = e;                   /// объект для обмена информацией между двумя потоками
 		this.root = root;
 
 		MenuBar mb = new MenuBar();
@@ -32,13 +32,16 @@ public class ClientThread extends Thread {
 				String str = "new";
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);					
+					str = objectExChanger.exchange(str);					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
+		
+		//newgame.setOnAction(event -> System.out.println("hello"));
+		
 		
 		Menu sort = new Menu("Сортировка");
 		MenuItem java = new Menu("java");
@@ -49,7 +52,7 @@ public class ClientThread extends Thread {
 				String str = "javaSort";
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);					
+					str = objectExChanger.exchange(str);					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -61,7 +64,7 @@ public class ClientThread extends Thread {
 				String str = "scalaSort";
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);					
+					str = objectExChanger.exchange(str);					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -87,7 +90,7 @@ public class ClientThread extends Thread {
 				String str = "write";
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);					
+					str = objectExChanger.exchange(str);					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -99,7 +102,7 @@ public class ClientThread extends Thread {
 				String str = "read";
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);					
+					str = objectExChanger.exchange(str);					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -115,7 +118,7 @@ public class ClientThread extends Thread {
 				String str = "automodeOn";
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);					
+					str = objectExChanger.exchange(str);					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -128,7 +131,7 @@ public class ClientThread extends Thread {
 				String str = "automodeOff";
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);					
+					str = objectExChanger.exchange(str);					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -143,7 +146,7 @@ public class ClientThread extends Thread {
 				String str = "easy";                    // Убрать лишний код , убрать повторения
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);				
+					str = objectExChanger.exchange(str);				
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block        // Выводить что-то
 					e.printStackTrace();
@@ -157,7 +160,7 @@ public class ClientThread extends Thread {
 				String str = "medium";
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);
+					str = objectExChanger.exchange(str);
 					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -171,7 +174,7 @@ public class ClientThread extends Thread {
 				String str = "hard";
 				try {
 					serverThread.interrupt();
-					str = exgr.exchange(str);
+					str = objectExChanger.exchange(str);
 					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -189,14 +192,7 @@ public class ClientThread extends Thread {
 
 	/** Основной алгоритм реализации жизни змейки на поле игры */
 	public void run() {
-		do {
-			
-			try {
-				sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		do {			
 
 		} while (true);
 	}

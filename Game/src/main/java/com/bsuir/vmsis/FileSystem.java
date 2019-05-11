@@ -1,24 +1,21 @@
 package com.bsuir.vmsis;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
-import java.util.TreeMap;
-
+import java.util.List;
 import com.bsuir.vmsis1.Field;
-import com.bsuir.vmsis1.snake.SnakeElement;
 
 /** Класс в котором описана нотация игры */
 public class FileSystem implements Comparable<FileSystem> {
 
-	private FileWriter writer = null;
-	private FileReader reader = null;
+	private FileWriter writer;
+	private FileReader reader;
 
 	/** За голову возьмем '*' */
 	private char head = '*';
@@ -68,7 +65,7 @@ public class FileSystem implements Comparable<FileSystem> {
 	public void write(Field field, boolean rewrite, ArrayList<FileSystem> notationList) throws Exception {
 		if (!rewrite) {
 
-			writer = new FileWriter("C:\\Users\\VALERA\\eclipse-workspace\\Game\\src\\savedgame.txt", true);
+			writer = new FileWriter("../Game/src/main/resources/savedgame.txt", true);
 			BufferedWriter bufferWriter = new BufferedWriter(writer);
 
 			try {
@@ -92,13 +89,13 @@ public class FileSystem implements Comparable<FileSystem> {
 				bufferWriter.close();
 
 			} catch (Exception e) {
-				System.out.println(e);
+				System.out.println("error rewrite file system");
 			}
 
 		}
 		if (rewrite) {
 
-			writer = new FileWriter("C:\\Users\\VALERA\\eclipse-workspace\\Game\\src\\savedgame.txt");
+			writer = new FileWriter("../Game/src/main/resources/savedgame.txt");
 			for (FileSystem snakeNotation : notationList) {
 
 				for (int i = 0; i < snakeNotation.index; i++) {
@@ -122,37 +119,27 @@ public class FileSystem implements Comparable<FileSystem> {
 		}
 
 	}
-	
+
 	public void read(Field field) throws IOException {
-		ArrayList<String> rows = new ArrayList<String>();
-		BufferedReader reader = new BufferedReader(
-				new FileReader("C:\\Users\\VALERA\\eclipse-workspace\\Game\\andrey.txt"));
 
-		String s;
-		while ((s = reader.readLine()) != null)
-			rows.add(s);
-
-		Collections.sort(rows);
-
-		FileWriter writer = new FileWriter("C:\\Users\\VALERA\\eclipse-workspace\\Game\\andrey.txt");
-		for (String cur : rows)
-			writer.write(cur + "\n");
-
-		reader.close();
-		writer.close();
+		List<String> lines = Files.readAllLines(Paths.get("../Game/src/main/resources/savedgame.txt"),
+				StandardCharsets.UTF_8);
+		for (String line : lines) {
+			System.out.println(line);
+		}
 	}
-	
+
 	public int compareTo(FileSystem o) {
-        
+
 		Integer lenght1 = this.lenght[this.index - 1];
 		Integer lenght2 = o.lenght[o.index - 1];
-    
-		if (lenght2 > lenght1) {
+
+		if (lenght2 < lenght1) {
 			return -1;
-		} else if (lenght2 < lenght1) {
+		} else if (lenght2 > lenght1) {
 			return 1;
 		} else {
 			return 0;
 		}
-	}	
+	}
 }

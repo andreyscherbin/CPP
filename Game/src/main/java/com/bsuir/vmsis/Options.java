@@ -1,3 +1,4 @@
+
 package com.bsuir.vmsis;
 
 /** Класс описания опций игры */
