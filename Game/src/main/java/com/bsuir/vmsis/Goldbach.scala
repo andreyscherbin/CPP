@@ -14,6 +14,7 @@ object Goldbach {
        */
 
       val resultList = numbers(number, primeNumbers((2 to number).reverse))
+      println("scala GOLDBACH");
       resultList.foreach(println)
       resultList
     }

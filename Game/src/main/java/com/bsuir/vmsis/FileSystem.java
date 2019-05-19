@@ -22,13 +22,7 @@ public class FileSystem implements Comparable<FileSystem> {
 
 	/** За хвост возьмем '#' */
 	private char tail = '#';
-
-	/** За обычный элемент возьмем '>' */
-	private char element = '>';
-	private char wayDown = '↓';
-	private char wayUp = '↑';
-	private char wayRight = '→';
-	private char wayLeft = '←';
+	
 	private char x = 'x';
 	private char y = 'y';
 
@@ -37,7 +31,7 @@ public class FileSystem implements Comparable<FileSystem> {
 	public int[] masWay;
 	public int[] lenght;
 	public int index = 0;
-	public int N = 0;
+	public int N = 0;	
 
 	public FileSystem() {
 
@@ -45,7 +39,6 @@ public class FileSystem implements Comparable<FileSystem> {
 		masY = new int[50];
 		masWay = new int[50];
 		lenght = new int[50];
-
 	}
 
 	public FileSystem(FileSystem copyObject) {

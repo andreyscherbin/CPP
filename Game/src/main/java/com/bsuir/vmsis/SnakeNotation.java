@@ -1,41 +1,58 @@
 package com.bsuir.vmsis;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class SnakeNotation {
 
-	List<String> listOfSnakeNotations;
+	private List<FileSystem> listSnakeNotations = new ArrayList<FileSystem>();
 
-	public SnakeNotation() {
-		listOfSnakeNotations = new ArrayList<String>();
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-				new FileInputStream("../Game/src/main/resources/savedgame.txt"), StandardCharsets.UTF_8))) {
-			String line;
-			while ((line = reader.readLine()) != null) {
-				listOfSnakeNotations.add(line);
-			}
-
-		} catch (IOException e) {
-			
-			System.out.println("error read file autowrite");
-		}
+	static {
+		initList();
 	}
 
-	public void addNotation(String snakenotation) {
-		listOfSnakeNotations.add(snakenotation);
+	private static void initList() {
+
+		List<FileSystem> listSnakeNotations = new ArrayList<FileSystem>();
 	}
 
-	public List<String> getListOfSnakeNotations() {
+	public FileSystem addNotation(FileSystem notation) {
 
-		return listOfSnakeNotations;
+		listSnakeNotations.add(notation);
+		return notation;
 	}
 
+	public List<FileSystem> getAllNotation() {
+
+		return listSnakeNotations;
+	}
+
+	public void sortListNotations() {
+		listSnakeNotations = FPQuickSort(listSnakeNotations);
+	}
+
+	private List<FileSystem> FPQuickSort(List<FileSystem> elements) {
+
+		if (elements.size() == 0)
+			return elements;
+
+		FileSystem baseElement = elements.get(0);
+
+		List<FileSystem> lesser = elements.stream().filter(x -> x.compareTo(baseElement) < 0)
+				.collect(Collectors.toList());
+
+		List<FileSystem> greater = elements.stream().filter(x -> x.compareTo(baseElement) > 0)
+				.collect(Collectors.toList());
+
+		List<FileSystem> sorted = new ArrayList<FileSystem>();
+		sorted.addAll(FPQuickSort(lesser));
+		sorted.add(baseElement);
+		sorted.addAll(FPQuickSort(greater));
+
+		return sorted;
+	}
 }

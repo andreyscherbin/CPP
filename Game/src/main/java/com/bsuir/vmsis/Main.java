@@ -25,7 +25,7 @@ public class Main extends Application {
 	public void init() {
 
 		springContext = SpringApplication.run(getClass());
-		springContext.getAutowireCapableBeanFactory().autowireBean(this);
+		//springContext.getAutowireCapableBeanFactory().autowireBean(this);
 	}
 
 	@Override
